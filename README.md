@@ -16,7 +16,7 @@ An **Observability and AIOps platform** designed to detect anomalies and predict
 
 ---
 
-# 📖 Overview
+# Overview
 
 Modern applications generate massive volumes of logs and operational events.
 When something breaks, engineering teams often spend **hours investigating logs and metrics** to identify the root cause.
@@ -29,27 +29,27 @@ The platform continuously monitors infrastructure signals and alerts engineers w
 
 ---
 
-# ✨ Key Features
+# Key Features
 
-### 🔎 Real-time Log Ingestion
+### Real-time Log Ingestion
 
 High-throughput ingestion pipeline designed to process large volumes of system and application logs.
 
-### 🧠 AI-powered Anomaly Detection
+### AI-powered Anomaly Detection
 
 Machine Learning models such as **Isolation Forests** and **Autoencoders** detect subtle behavioral anomalies in infrastructure data.
 
-### 🚨 Proactive Alerting
+### Proactive Alerting
 
 Receive alerts via push notifications, dashboards, or webhooks before failures escalate.
 
-### 📊 Unified Observability Dashboard
+### Unified Observability Dashboard
 
 A centralized interface to visualize logs, anomalies, alerts, and infrastructure health.
 
 ---
 
-# 🧠 System Architecture
+# System Architecture
 
 Igris follows an **event-driven architecture** where logs are ingested, processed, analyzed by ML models, and then transformed into actionable insights.
 
@@ -76,11 +76,11 @@ The platform separates responsibilities into independent services to ensure scal
 
 ---
 
-# 🏗️ Monorepo Architecture
+# Monorepo Architecture
 
 This project is structured as a **monorepo** to facilitate collaboration, code sharing, and scalability across services.
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 igris-platform
@@ -108,7 +108,7 @@ Shared packages allow all services to reuse types, schemas, and core logic while
 
 ---
 
-# 💻 Tech Stack
+# Tech Stack
 
 ## Backend
 
@@ -139,7 +139,7 @@ Shared packages allow all services to reuse types, schemas, and core logic while
 
 ---
 
-# 🚧 Project Status
+# Project Status
 
 **Igris is currently in early MVP development.**
 
@@ -154,7 +154,7 @@ Documentation and setup instructions will evolve as the project matures.
 
 ---
 
-# 🛣️ Roadmap
+# Roadmap
 
 ### Phase 1 — MVP
 
@@ -179,7 +179,7 @@ Documentation and setup instructions will evolve as the project matures.
 
 ---
 
-# 🌍 Vision
+# Vision
 
 The long-term vision of **Igris** is to evolve into a **fully autonomous AIOps platform** capable of:
 
@@ -204,7 +204,7 @@ Setup instructions will be added as the MVP progresses.
 
 ---
 
-# 🤝 Contributing
+# Contributing
 
 Contributions are welcome!
 
