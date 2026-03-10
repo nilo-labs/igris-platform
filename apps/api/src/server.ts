@@ -9,6 +9,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { healthRoutes } from './routes/health.js'
+import { logsRoute } from './routes/logs.js'
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
@@ -31,6 +32,7 @@ app.register(fastifySwaggerUi, {
 })
 
 app.register(healthRoutes)
+app.register(logsRoute)
 
 const start = async () => {
   try {
