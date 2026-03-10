@@ -1,5 +1,6 @@
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
+import { servers } from '@igris/database/schema.js'
 import fastify from 'fastify'
 import {
   jsonSchemaTransform,
@@ -7,9 +8,9 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
-
 import { healthRoutes } from './routes/health.js'
-import { logsRoute } from './routes/logs.js'
+import { logsRoutes } from './routes/logs.js'
+import { serverRoutes } from './routes/server.js'
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
@@ -32,7 +33,8 @@ app.register(fastifySwaggerUi, {
 })
 
 app.register(healthRoutes)
-app.register(logsRoute)
+app.register(logsRoutes)
+app.register(serverRoutes)
 
 const start = async () => {
   try {

@@ -26,6 +26,9 @@ importers:
       '@fastify/swagger-ui':
         specifier: ^5.2.5
         version: 5.2.5
+      '@igris/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       fastify:
         specifier: ^5.8.2
         version: 5.8.2

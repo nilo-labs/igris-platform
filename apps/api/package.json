@@ -15,6 +15,7 @@
   "dependencies": {
     "@fastify/swagger": "^9.7.0",
     "@fastify/swagger-ui": "^5.2.5",
+    "@igris/database": "workspace:*",
     "fastify": "^5.8.2",
     "fastify-type-provider-zod": "^6.1.0",
     "zod": "^4.3.6"

@@ -1,7 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
-export const logsRoute: FastifyPluginAsyncZod = async (app) => {
+export const logsRoutes: FastifyPluginAsyncZod = async (app) => {
   app.post(
     '/logs',
     {
