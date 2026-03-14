@@ -29,6 +29,9 @@ importers:
       '@igris/database':
         specifier: workspace:*
         version: link:../../packages/database
+      drizzle-orm:
+        specifier: ^0.45.1
+        version: 0.45.1(postgres@3.4.8)
       fastify:
         specifier: ^5.8.2
         version: 5.8.2

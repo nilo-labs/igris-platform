@@ -1,3 +1,5 @@
+import { db, schema } from '@igris/database'
+import { eq } from 'drizzle-orm'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
@@ -23,11 +25,25 @@ export const logsRoutes: FastifyPluginAsyncZod = async (app) => {
               memoryUsage: z.number(),
             }),
           }),
+          404: z.object({
+            message: z.string(),
+          }),
         },
       },
     },
     async (request, reply) => {
       const { serverId, cpuUsage, memoryUsage, timestamp } = request.body
+
+      const [serverExists] = await db
+        .select()
+        .from(schema.servers)
+        .where(eq(schema.servers.id, serverId))
+
+      if (!serverExists) {
+        return reply.status(404).send({
+          message: 'Access Denied: Server not found in the registry.',
+        })
+      }
 
       return reply.status(201).send({
         message: 'Log successfully ingested',
