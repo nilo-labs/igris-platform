@@ -2,6 +2,7 @@ import { db, schema } from '@igris/database'
 import { eq } from 'drizzle-orm'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
+import { Point, writeApi } from '../lib/influx.js'
 
 export const logsRoutes: FastifyPluginAsyncZod = async (app) => {
   app.post(
@@ -44,6 +45,15 @@ export const logsRoutes: FastifyPluginAsyncZod = async (app) => {
           message: 'Access Denied: Server not found in the registry.',
         })
       }
+
+      const point = new Point('system_metrics')
+        .tag('serverId', serverId)
+        .floatField('cpuUsage', cpuUsage)
+        .floatField('memoryUsage', memoryUsage)
+        .timestamp(new Date(timestamp))
+
+      writeApi.writePoint(point)
+      await writeApi.flush()
 
       return reply.status(201).send({
         message: 'Log successfully ingested',

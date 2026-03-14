@@ -29,6 +29,9 @@ importers:
       '@igris/database':
         specifier: workspace:*
         version: link:../../packages/database
+      '@influxdata/influxdb-client':
+        specifier: ^1.35.0
+        version: 1.35.0
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(postgres@3.4.8)
@@ -616,6 +619,9 @@ packages:
 
   '@fastify/swagger@9.7.0':
     resolution: {integrity: sha512-Vp1SC1GC2Hrkd3faFILv86BzUNyFz5N4/xdExqtCgkGASOzn/x+eMe4qXIGq7cdT6wif/P/oa6r1Ruqx19paZA==}
+
+  '@influxdata/influxdb-client@1.35.0':
+    resolution: {integrity: sha512-woWMi8PDpPQpvTsRaUw4Ig+nOGS/CWwAwS66Fa1Vr/EkW+NEwxI8YfPBsdBMn33jK2Y86/qMiiuX/ROHIkJLTw==}
 
   '@lukeed/ms@2.0.2':
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
@@ -1488,6 +1494,8 @@ snapshots:
       yaml: 2.8.2
     transitivePeerDependencies:
       - supports-color
+
+  '@influxdata/influxdb-client@1.35.0': {}
 
   '@lukeed/ms@2.0.2': {}
 

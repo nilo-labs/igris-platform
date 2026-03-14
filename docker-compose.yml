@@ -27,7 +27,22 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb2
 
+  grafana: 
+    image: grafana/grafana:latest
+    container_name: igris_grafana
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=adminpassword
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana_data:/var/lib/grafana
+
 
 volumes:
   igris_pg_data:
   influxdb_data: 
+  grafana_data:
