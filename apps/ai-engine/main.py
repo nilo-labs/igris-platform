@@ -80,7 +80,7 @@ def send_alert_to_api(row):
     try:
         response = requests.post(API_URL, json=payload)
         if response.status_code == 201:
-            print(f'[SUCESSO] Alerta enviado: CPU {payload['cpuUsage']}% | Tipo: {payload['type']}')
+            print(f"[SUCESSO] Alerta enviado: CPU {payload['cpuUsage']}% | Tipo: {payload['type']}")
         else:
             print(f'[ERRO API] Código {response.status_code}: {response.text}')
     except Exception as e:
