@@ -1,0 +1,18 @@
+[project]
+name = "ai-engine"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "danilotavares-dev",email = "danilotavarespr00@gmail.com"}
+]
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "pandas (>=3.0.1,<4.0.0)",
+    "scikit-learn (>=1.8.0,<2.0.0)",
+    "influxdb-client (>=1.50.0,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
