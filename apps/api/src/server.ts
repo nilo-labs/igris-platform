@@ -1,3 +1,4 @@
+import cors from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
 import { anomalies, servers } from '@igris/database/schema.js'
@@ -12,7 +13,6 @@ import { anomaliesRoutes } from './routes/anomalies.js'
 import { healthRoutes } from './routes/health.js'
 import { logsRoutes } from './routes/logs.js'
 import { serverRoutes } from './routes/server.js'
-import cors from '@fastify/cors'
 
 const app = fastify({ logger: true })
 
