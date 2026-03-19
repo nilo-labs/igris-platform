@@ -43,15 +43,15 @@ export function AnomaliesList() {
   }
 
   return (
-    <div className="bg-white/70 rounded-2xl shadow-sm border border-gray-400 overflow-hidden">
-      <div className="p-6 border-b border-gray-200 bg-white/80">
+    <div className="bg-white/90 rounded-2xl shadow-sm border border-gray-400 overflow-hidden">
+      <div className="p-6 border-b border-gray-200 bg-white/20">
         <h2 className="text-xl font-bold text-gray-800">
           Anomalias de CPU Detectadas
         </h2>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-white/70">
+          <thead className="text-xs text-gray-700 uppercase bg-white/10">
             <tr>
               <th className="px-6 py-4">Servidor (UUID)</th>
               <th className="px-6 py-4">Uso de CPU</th>
@@ -63,7 +63,7 @@ export function AnomaliesList() {
             {anomalies.map((anomaly) => (
               <tr
                 key={anomaly.id}
-                className="hover:bg-gray-50 transition-colors"
+                className="hover:bg-zinc-300 transition-colors"
               >
                 <td className="px-6 py-4 font-mono text-xs text-gray-500">
                   {anomaly.serverId}
