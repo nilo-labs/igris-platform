@@ -7,10 +7,10 @@ export function App() {
       <div className="max-w-6xl mx-auto">
         <header className="flex flex-col justify-center items-center mb-8">
           <img className="w-12" src={logoIgris} alt="Logo Igris Platform" />
-          <h1 className="text-3xl font-extrabold text-red-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-red-950 tracking-tight">
             IGRIS
           </h1>
-          <p className="text-zinc-300 mt-1">Painel de Monitoramento</p>
+          <p className="text-red-900 mt-1">Painel de Monitoramento</p>
         </header>
 
         <main>
