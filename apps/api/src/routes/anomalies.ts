@@ -1,6 +1,6 @@
 import { db } from '@igris/database'
 import { anomalies, servers } from '@igris/database/schema.js'
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 
@@ -69,6 +69,39 @@ export async function anomaliesRoutes(app: FastifyInstance) {
       return reply
         .status(201)
         .send({ message: 'Alerta crítico registrado com sucesso.' })
+    },
+  )
+
+  app.get(
+    '/anomalies',
+    {
+      schema: {
+        summary: 'Listar anomalias',
+        description:
+          'Retorna o histórico de alertas críticos registrados no banco de dados, ordenados do mais recente para o mais antigo.',
+        tags: ['Anomalies'],
+        response: {
+          200: z
+            .array(
+              z.object({
+                id: z.string().uuid(),
+                serverId: z.string().uuid(),
+                cpuUsage: z.number(),
+                type: z.string(),
+                timestamp: z.date(),
+              }),
+            )
+            .describe('List of anomaly alerts'),
+        },
+      },
+    },
+    async (request, reply) => {
+      const allAnomalies = await db
+        .select()
+        .from(anomalies)
+        .orderBy(desc(anomalies.timestamp))
+
+      return reply.status(200).send(allAnomalies)
     },
   )
 }

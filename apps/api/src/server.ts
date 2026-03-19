@@ -12,8 +12,9 @@ import { anomaliesRoutes } from './routes/anomalies.js'
 import { healthRoutes } from './routes/health.js'
 import { logsRoutes } from './routes/logs.js'
 import { serverRoutes } from './routes/server.js'
+import cors from '@fastify/cors'
 
-const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
+const app = fastify({ logger: true })
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
@@ -31,6 +32,10 @@ app.register(fastifySwagger, {
 
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
+})
+
+app.register(cors, {
+  origin: true,
 })
 
 app.register(healthRoutes)
