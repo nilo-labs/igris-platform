@@ -1,3 +1,4 @@
+import { REPL_MODE_STRICT } from 'node:repl'
 import { db, schema } from '@igris/database'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
@@ -7,6 +8,7 @@ export const serverRoutes: FastifyPluginAsyncZod = async (app) => {
     '/servers',
     {
       schema: {
+        summary: 'Criar novo servidor',
         description: 'Register a new server to be monitored',
         tags: ['Servers'],
         body: z.object({
@@ -44,6 +46,40 @@ export const serverRoutes: FastifyPluginAsyncZod = async (app) => {
         message: 'Server registered successfully 🚀',
         serverId: insertServer.insertId,
       })
+    },
+  )
+
+  app.get(
+    '/servers',
+    {
+      schema: {
+        summary: 'Buscar todos os servidores',
+        description:
+          'Retorna a lista de servidores monitorados pela plataforma',
+        tags: ['Servers'],
+        response: {
+          200: z.array(
+            z.object({
+              id: z.string().uuid(),
+              name: z.string(),
+              ipAddress: z.string(),
+              status: z.string(),
+            }),
+          ),
+        },
+      },
+    },
+    async (request, reply) => {
+      const rawServers = await db.select().from(schema.servers)
+
+      const formattedServers = rawServers.map((server) => ({
+        id: server.id,
+        name: server.name,
+        ipAddress: server.ipAddress,
+        status: 'Ativo',
+      }))
+
+      return reply.status(200).send(formattedServers)
     },
   )
 }

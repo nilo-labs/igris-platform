@@ -43,7 +43,7 @@ export function AnomaliesList() {
   }
 
   return (
-    <div className="bg-white/90 rounded-2xl shadow-sm border border-gray-400 overflow-hidden">
+    <div className="bg-white/30 rounded-2xl shadow-sm border border-gray-400 overflow-hidden">
       <div className="p-6 border-b border-gray-200 bg-white/20">
         <h2 className="text-xl font-bold text-gray-800">
           Anomalias de CPU Detectadas
@@ -51,7 +51,7 @@ export function AnomaliesList() {
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-white/10">
+          <thead className="text-xs text-gray-900 uppercase bg-white/10">
             <tr>
               <th className="px-6 py-4">Servidor (UUID)</th>
               <th className="px-6 py-4">Uso de CPU</th>
@@ -63,9 +63,9 @@ export function AnomaliesList() {
             {anomalies.map((anomaly) => (
               <tr
                 key={anomaly.id}
-                className="hover:bg-zinc-300 transition-colors"
+                className="hover:bg-zinc-300/60 transition-colors"
               >
-                <td className="px-6 py-4 font-mono text-xs text-gray-500">
+                <td className="px-6 py-4 font-mono text-xs text-black">
                   {anomaly.serverId}
                 </td>
                 <td className="px-6 py-4 text-red-600 font-bold">
@@ -76,7 +76,7 @@ export function AnomaliesList() {
                     {anomaly.type}
                   </span>
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-700">
+                <td className="px-6 py-4 font-medium text-gray-800">
                   {new Date(anomaly.timestamp).toLocaleString('pt-BR')}
                 </td>
               </tr>
