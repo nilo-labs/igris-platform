@@ -19,8 +19,15 @@ export function App() {
         </header>
 
         <main className="flex flex-col gap-12">
-          <AnomaliesList />
-          <ServerList />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-5">
+              <ServerList />
+            </div>
+
+            <div className="lg:col-span-7">
+              <AnomaliesList />
+            </div>
+          </div>
         </main>
       </div>
     </div>
