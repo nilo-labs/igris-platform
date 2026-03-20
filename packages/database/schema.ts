@@ -4,6 +4,7 @@ export const servers = pgTable('servers', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name').notNull(),
   ipAddress: text('ip_address').notNull(),
+  lastPingAt: timestamp('last_ping_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 

@@ -8,6 +8,13 @@
       "when": 1773170561657,
       "tag": "0000_spooky_butterfly",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774045439118,
+      "tag": "0001_curly_justin_hammer",
+      "breakpoints": true
     }
   ]
 }

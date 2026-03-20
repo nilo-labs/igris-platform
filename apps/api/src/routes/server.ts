@@ -1,5 +1,6 @@
 import { REPL_MODE_STRICT } from 'node:repl'
 import { db, schema } from '@igris/database'
+import { desc, eq } from 'drizzle-orm'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
@@ -71,13 +72,26 @@ export const serverRoutes: FastifyPluginAsyncZod = async (app) => {
     },
     async (request, reply) => {
       const rawServers = await db.select().from(schema.servers)
+      const formattedServers = rawServers.map((server) => {
+        let currentStatus = 'Offline'
 
-      const formattedServers = rawServers.map((server) => ({
-        id: server.id,
-        name: server.name,
-        ipAddress: server.ipAddress,
-        status: 'Ativo',
-      }))
+        if (server.lastPingAt) {
+          const now = new Date()
+          const pingTime = new Date(server.lastPingAt)
+          const diffInSeconds = (now.getTime() - pingTime.getTime()) / 1000
+
+          if (diffInSeconds <= 30) {
+            currentStatus = 'Ativo'
+          }
+        }
+
+        return {
+          id: server.id,
+          name: server.name,
+          ipAddress: server.ipAddress,
+          status: currentStatus,
+        }
+      })
 
       return reply.status(200).send(formattedServers)
     },
