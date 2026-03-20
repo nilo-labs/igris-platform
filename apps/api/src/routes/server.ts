@@ -1,6 +1,6 @@
+import { REPL_MODE_STRICT } from 'node:repl'
 import { db, schema } from '@igris/database'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import { REPL_MODE_STRICT } from 'node:repl'
 import { z } from 'zod'
 
 export const serverRoutes: FastifyPluginAsyncZod = async (app) => {
