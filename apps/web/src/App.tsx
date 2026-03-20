@@ -1,5 +1,6 @@
 import logoIgris from '../../../assets/logo-igris-platform.png'
 import { AnomaliesList } from './components/AnomaliesList'
+import { ServerList } from './components/ServerList'
 
 export function App() {
   return (
@@ -8,7 +9,7 @@ export function App() {
         <header className="flex flex-col justify-center mb-8">
           <div className="flex flex-col items-center justify-cente">
             <img className="w-12" src={logoIgris} alt="Logo Igris Platform" />
-            <h1 className="text-2xl font-extrabold text-zinc-400 tracking-tight">
+            <h1 className="text-2xl font-extrabold text-white/60 tracking-tight">
               IGRIS
             </h1>
           </div>
@@ -17,8 +18,9 @@ export function App() {
           </p>
         </header>
 
-        <main>
+        <main className="flex flex-col gap-12">
           <AnomaliesList />
+          <ServerList />
         </main>
       </div>
     </div>
