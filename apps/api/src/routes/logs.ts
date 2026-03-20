@@ -46,6 +46,11 @@ export const logsRoutes: FastifyPluginAsyncZod = async (app) => {
         })
       }
 
+      await db
+        .update(schema.servers)
+        .set({ lastPingAt: new Date() })
+        .where(eq(schema.servers.id, request.body.serverId))
+
       const point = new Point('system_metrics')
         .tag('serverId', serverId)
         .floatField('cpuUsage', cpuUsage)

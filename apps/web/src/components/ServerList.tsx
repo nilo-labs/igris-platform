@@ -12,16 +12,22 @@ export function ServerList() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:3333/servers')
-      .then((res) => res.json())
-      .then((data) => {
-        setServers(data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.error('Erro ao buscar servidores: ', err)
-        setLoading(false)
-      })
+    const fetchServers = () => {
+      fetch('http://localhost:3333/servers')
+        .then((res) => res.json())
+        .then((data) => {
+          setServers(data)
+          setLoading(false)
+        })
+        .catch((err) => {
+          console.error('Erro ao buscar servidores:', err)
+          setLoading(false)
+        })
+    }
+    fetchServers()
+    const intervalId = setInterval(fetchServers, 10000)
+
+    return () => clearInterval(intervalId)
   }, [])
 
   if (loading) {
