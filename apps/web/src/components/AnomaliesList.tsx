@@ -13,16 +13,24 @@ export function AnomaliesList() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:3333/anomalies')
-      .then((res) => res.json())
-      .then((data) => {
-        setAnomalies(data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.error('Erro ao buscar dados:', err)
-        setLoading(false)
-      })
+    const fetchAnomalies = () => {
+      fetch('http://localhost:3333/anomalies')
+        .then((res) => res.json())
+        .then((data) => {
+          setAnomalies(data)
+          setLoading(false)
+        })
+        .catch((err) => {
+          console.error('Erro ao buscar anomalias:', err)
+          setLoading(false)
+        })
+    }
+
+    fetchAnomalies()
+
+    const intervalId = setInterval(fetchAnomalies, 10000)
+
+    return () => clearInterval(intervalId)
   }, [])
 
   if (loading) {
