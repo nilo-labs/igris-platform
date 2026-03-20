@@ -17,7 +17,7 @@ export function ServerList() {
 
   useEffect(() => {
     const fetchServers = () => {
-      fetch('http://localhost:3333/servers')
+      fetch(`http://localhost:3333/servers?_t=${refreshTrigger}`)
         .then((res) => res.json())
         .then((data) => {
           setServers(data)

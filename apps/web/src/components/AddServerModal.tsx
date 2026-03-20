@@ -42,8 +42,12 @@ export function AddServerModal({
       setIpAddress('')
       onSuccess()
       onClose()
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('Ocorreu um erro desconhecido ao cadastrar o servidor.')
+      }
     } finally {
       setLoading(false)
     }
