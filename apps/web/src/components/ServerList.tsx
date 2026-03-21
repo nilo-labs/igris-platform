@@ -79,30 +79,31 @@ export function ServerList() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {servers.map((server) => (
-                  <tr
-                    key={server.id}
-                    className="hover:bg-gray-100/90 transition-colors"
-                  >
-                    <td className="px-6 py-4 font-bold text-gray-800">
-                      {server.name}
-                    </td>
-                    <td className="px-6 py-4 font-mono text-xs">
-                      {server.ipAddress}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`text-xs font-bold px-3 py-1 rounded-full border ${
-                          server.status === 'Ativo'
-                            ? 'bg-green-100 text-green-800 border-green-200'
-                            : 'bg-red-100 text-red-800 border-red-200'
-                        }`}
-                      >
-                        {server.status || 'Ativo'}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {Array.isArray(servers) &&
+                  servers.map((server) => (
+                    <tr
+                      key={server.id}
+                      className="hover:bg-gray-100/90 transition-colors"
+                    >
+                      <td className="px-6 py-4 font-bold text-gray-800">
+                        {server.name}
+                      </td>
+                      <td className="px-6 py-4 font-mono text-xs">
+                        {server.ipAddress}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`text-xs font-bold px-3 py-1 rounded-full border ${
+                            server.status === 'Ativo'
+                              ? 'bg-green-100 text-green-800 border-green-200'
+                              : 'bg-red-100 text-red-800 border-red-200'
+                          }`}
+                        >
+                          {server.status || 'Ativo'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           )}

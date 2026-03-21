@@ -1,8 +1,10 @@
+import process from 'node:process'
 import si from 'systeminformation'
 
-const API_URL = 'http://localhost:3333/logs'
+const API_URL = process.env.API_URL || 'http://localhost:3333/logs'
 
-const SERVER_ID = '6f28a188-0cbd-45bf-bb59-f0413f0bd3c4'
+const SERVER_ID =
+  process.env.SERVER_ID || '6f28a188-0cbd-45bf-bb59-f0413f0bd3c4'
 
 async function collectAndSendMetrics() {
   try {

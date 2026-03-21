@@ -18,7 +18,6 @@ services:
     ports:
       - '8086:8086'
     environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=admin
       - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
       - DOCKER_INFLUXDB_INIT_ORG=igris
@@ -41,6 +40,58 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
 
+
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api/Dockerfile
+    container_name: igris_api
+    ports:
+      - '3333:3333'
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@postgres:5432/igris
+      - INFLUX_URL=http://influxdb:8086
+      - INFLUX_TOKEN=supersecrettoken123
+      - INFLUX_ORG=igris
+      - INFLUX_BUCKET=logs
+    depends_on:
+      - postgres
+      - influxdb
+
+  ai-engine:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/ai-engine/Dockerfile
+    container_name: igris_ai_engine
+    environment:
+      - INFLUX_URL=http://influxdb:8086
+      - API_URL=http://api:3333
+    depends_on:
+      - influxdb
+      - api
+
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web/Dockerfile
+    container_name: igris_web
+    ports:
+      - '5173:5173'
+    depends_on:
+      - api
+
+  agent:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/agent/Dockerfile
+    container_name: igris_agent
+    privileged: true 
+    pid: "host"
+    environment:
+      - API_URL=http://api:3333/logs
+      - SERVER_ID=8ea5849b-296b-430d-a373-75c2e9a1f4c1
+    depends_on:
+      - api
 
 volumes:
   igris_pg_data:

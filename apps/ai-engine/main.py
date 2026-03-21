@@ -1,20 +1,21 @@
 import time
 import pandas as pd
+import os
 import requests
 from sklearn.ensemble import IsolationForest
 from influxdb_client import InfluxDBClient
 
 # ================= CONFIGURAÇÕES =============
-INFLUX_URL = 'http://localhost:8086'
+INFLUX_URL = os.getenv('INFLUX_URL', 'http://influxdb:8086') 
 INFLUX_TOKEN = 'supersecrettoken123'
 INFLUX_ORG = 'igris'
 INFLUX_BUCKET = 'logs'
 
-API_BASE_URL = 'http://localhost:3333'
+API_BASE_URL = os.getenv('API_URL', 'http://api:3333')
 API_SERVERS_URL = f'{API_BASE_URL}/servers'
 API_ANOMALIES_URL = f'{API_BASE_URL}/anomalies'
 
-POLL_INTERVAL_SECONDS = 60 
+POLL_INTERVAL_SECONDS = 30
 # ==============================================
 
 def get_active_servers():
