@@ -29,6 +29,12 @@ The platform continuously monitors infrastructure signals and alerts engineers w
 
 ---
 
+# Screenshots
+
+<img src="./assets/print-dashboard.png" alt="print dashboard"/>
+
+---
+
 # Key Features
 
 ### Real-time Log Ingestion
@@ -51,25 +57,28 @@ A centralized interface to visualize logs, anomalies, alerts, and infrastructure
 
 # System Architecture
 
-Igris follows an **event-driven architecture** where logs are ingested, processed, analyzed by ML models, and then transformed into actionable insights.
+Igris follows an **event-driven architecture** where telemetry is ingested, stored, analyzed by ML models, and transformed into actionable insights.
 
-```
-Servers / Applications
-        │
-        ▼
-Log Ingestion API (Fastify)
-        │
-        ▼
-Event Stream Processing
-        │
-        ▼
-ML Engine (Python)
-        │
-        ▼
-Anomaly Detection
-        │
-        ▼
-Alerts + Dashboard
+```text
+[ Hardware / Servers ]
+          │
+          ▼
+   Agent (Node.js) ──────────► Collects CPU/RAM/System Metrics
+          │
+          ▼
+ API Gateway (Fastify) ──────► PostgreSQL (Relational Data & Servers)
+          │
+          ▼
+ InfluxDB (Time-Series) ─────► Stores historical telemetry
+          │
+          ▼
+  AI Engine (Python) ────────► Runs Isolation Forest Anomaly Detection
+          │
+          ▼
+Alerts & Event Processing ───► Triggers Anomaly Webhooks
+          │
+          ▼
+ Web Dashboard (React) ──────► Real-time Observability
 ```
 
 The platform separates responsibilities into independent services to ensure scalability and flexibility.
@@ -88,16 +97,12 @@ igris-platform
 ├── apps
 │   ├── api        # Log ingestion service (Node.js + Fastify)
 │   ├── web        # Observability dashboard (React)
+|   ├── ai-engine  # Machine learning worker (Python)
+|   ├── agent      # hardware metrics collector (Node.js)
 │   └── mobile     # Mobile alerting app (React Native)
 │
-├── services
-│   └── ml-engine  # Machine learning worker (Python)
-│
 ├── packages
-│   ├── core       # Shared business logic
-│   ├── types      # Global TypeScript types
-│   ├── database   # Database schema and ORM configuration
-│   └── configs    # Shared linting and tooling configs
+│   └── database   # Database schema and ORM configuration
 │
 └── docs
     ├── adr        # Architectural Decision Records
@@ -127,9 +132,12 @@ Shared packages allow all services to reuse types, schemas, and core logic while
 * Isolation Forest
 * Autoencoders
 
-## Database & Data Layer
+## Database & Infrastructure
 
+* PostgreSQL (Relational Data)
 * Drizzle ORM
+* InfluxDB (Time-Series Data)
+* Docker & Docker Compose
 
 ## Architecture
 
@@ -141,27 +149,21 @@ Shared packages allow all services to reuse types, schemas, and core logic while
 
 # Project Status
 
-**Igris is currently in early MVP development.**
-
-Initial work is focused on building the core infrastructure:
-
-* Log ingestion pipeline
-* Event processing architecture
-* Machine learning anomaly detection
-* Observability dashboard
-
-Documentation and setup instructions will evolve as the project matures.
+**Phase 1 (MVP) is officially complete and functional.** The core infrastructure is up and running, featuring:
+* Real-time hardware telemetry agent
+* Log ingestion pipeline via Fastify
+* Machine learning anomaly detection (Isolation Forest)
+* Unified observability dashboard
 
 ---
 
 # Roadmap
 
-### Phase 1 — MVP
-
-* Log ingestion API
-* Basic anomaly detection
-* Initial dashboard
-* Alert system
+### Phase 1 — MVP ✅
+* [x] Log ingestion API
+* [x] Basic anomaly detection
+* [x] Initial dashboard
+* [x] Alert system
 
 ### Phase 2 — Observability Platform
 
@@ -194,16 +196,31 @@ Ultimately, Igris aims to reduce operational complexity and empower teams to foc
 
 # 🚀 Getting Started
 
-Setup instructions will be added as the MVP progresses.
+The entire platform is containerized for easy deployment and testing.
 
 ### Prerequisites
+* Docker & Docker Compose
+* Git
 
-* Node.js (v18+)
-* Python (3.9+)
-* Package manager (pnpm, npm, or yarn)
+### Quick Start
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/danilotavares-dev/igris-platform.git](https://github.com/danilotavares-dev/igris-platform.git)
+   cd igris-platform
+   ```
+2.  Start the platform:
+   ```bash
+   docker compose up --build -d
+   ```
+3. Access the services:
+* Dashboard: http://localhost:5173
+
+* API: http://localhost:3333
+
+* InfluxDB: http://localhost:8086
 
 ---
-
 # Contributing
 
 Contributions are welcome!
