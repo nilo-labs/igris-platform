@@ -29,7 +29,7 @@ The platform continuously monitors infrastructure signals and alerts engineers w
 
 ---
 
-# Screenshots
+# Screenshot
 
 <img src="./assets/print-dashboard.png" alt="print dashboard"/>
 
